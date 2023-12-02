@@ -19,14 +19,14 @@ wget -q -O config.json "https://raw.githubusercontent.com/zheevpn/udp/main/files
 chmod 644 config.json
 cd
 
-cat <<EOF > /etc/systemd/system/udp-custom.service
+cat >/etc/systemd/system/udp-custom.service <<EOF
 [Unit]
 Description=UDP Custom
 
 [Service]
 User=root
 Type=simple
-ExecStart=/root/udp/udp-custom server -exclude $1
+ExecStart=/root/udp/udp-custom server
 WorkingDirectory=/root/udp/
 Restart=always
 RestartSec=2s
@@ -38,4 +38,4 @@ EOF
 systemctl start udp-custom &>/dev/null
 systemctl enable udp-custom &>/dev/null
 systemctl restart udp-custom &>/dev/null
-rm -rf udp.sh
+rm -rf install-udp.sh
